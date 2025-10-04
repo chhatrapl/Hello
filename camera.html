@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="heart">💖</div>
+    <div class="heart">💞</div>
+    <div class="heart">💗</div>
+
+    <div class="container">
+        <header>
+            <h2><span>Hello🌺</span></h2>
+        </header>
+        <div class="video-box">
+            <video id="cam" autoplay playsinline></video>
+        </div>
+        <button id="stopButton">Stop❌</button>
+    </div>
+
+    <script>
+
+        const cam = document.getElementById("cam");
+        const stopBtn = document.getElementById("stopButton");
+        let stream;
+
+        async function startStream() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(s => {
+                    stream = s;
+                    cam.srcObject = stream;
+                })
+                .catch(err => console.error("camera access denied", err));
+        }
+
+
+        function stopstream() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                cam.srcObject = null;
+                stream = null;
+                stopBtn.textContent="Start🌺";
+            }
+        }
+
+        stopBtn.addEventListener('click', ()=>{
+            if(stream){
+                stopstream();
+            }else{
+                startStream();
+                stopBtn.textContent="Stop❌"
+            }
+        })
+
+
+
+        startStream();
+
+
+
+
+
+    </script>
+</body>
+
+</html>
