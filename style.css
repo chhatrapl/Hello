@@ -80,6 +80,13 @@ header img{
   filter: brightness(1.05);
 }
 
+#cam {
+  width: 100%;
+  height: auto;
+  transform: scaleX(-1); /* ye line mirror ko undo karegi (real orientation dikhayegi) */
+}
+
+
 /* capture button */
 button {
   background: linear-gradient(90deg, #ff9a9e, #fad0c4);
